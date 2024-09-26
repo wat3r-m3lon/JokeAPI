@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/style.css">
+    <title>Joke Generator</title>
+</head>
+<body>
+    <div class="container">
+        <!-- Centered Title -->
+        <h1>Custom Joke Generator</h1>
+
+        <!-- Form to select category, language, flags, and number of jokes -->
+        <form action="/get-joke" method="POST">
+            <div class="form-group">
+                <label for="category">Select Category:</label>
+                <select name="category" id="category">
+                    <option value="Any">Any</option>
+                    <option value="Programming">Programming</option>
+                    <option value="Misc">Misc</option>
+                    <option value="Dark">Dark</option>
+                    <option value="Pun">Pun</option>
+                    <option value="Spooky">Spooky</option>
+                    <option value="Christmas">Christmas</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="lang">Select Language:</label>
+                <select name="lang" id="lang">
+                    <option value="en">English</option>
+                    <option value="es">Spanish</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="blacklistFlags">Select Flags to Blacklist:</label>
+                <select name="blacklistFlags" id="blacklistFlags">
+                    <option value="">None</option>
+                    <option value="nsfw">NSFW</option>
+                    <option value="religious">Religious</option>
+                    <option value="political">Political</option>
+                    <option value="racist">Racist</option>
+                    <option value="sexist">Sexist</option>
+                    <option value="explicit">Explicit</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="amount">Number of Jokes:</label>
+                <input type="number" name="amount" id="amount" value="1" min="1" max="10">
+            </div>
+
+            <!-- Submit button -->
+            <button type="submit" class="get-joke-btn">Get Joke</button>
+        </form>
+
+        <!-- Joke display area -->
+        <div class="joke-box">
+            <!-- Check if there are jokes to display -->
+            <% if (joke && joke.length > 0) { %>
+                <% joke.forEach(function(joke) { %>
+                    <p><%= joke %></p>
+                <% }) %>
+            <% } else { %>
+                <p>No jokes to display yet.</p>
+            <% } %>
+
+            <!-- Display error message if exists -->
+            <% if (error) { %>
+                <p class="error-message"><%= error %></p>
+            <% } %>
+        </div>
+    </div>
+</body>
+</html>
